@@ -1,30 +1,28 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "aldesrahim/tabbed-panel",
+    "description": "This is my package tabbed-panel",
     "keywords": [
-        ":vendor_name",
+        "aldesrahim",
         "laravel",
         "filamentphp",
-        ":package_slug"
+        "tabbed-panel"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/aldesrahim/tabbed-panel",
     "support": {
-        "issues": "https://github.com/:vendor_slug/:package_slug/issues",
-        "source": "https://github.com/:vendor_slug/:package_slug"
+        "issues": "https://github.com/aldesrahim/tabbed-panel/issues",
+        "source": "https://github.com/aldesrahim/tabbed-panel"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Al Desrahim",
+            "email": "aldesrahim@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.2",
         "filament/filament": "^4.0",
-        "filament/forms": "^4.0",
-        "filament/tables": "^4.0",
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
@@ -44,13 +42,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Aldesrahim\\TabbedPanel\\": "src/",
+            "Aldesrahim\\TabbedPanel\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "Aldesrahim\\TabbedPanel\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -65,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Aldesrahim\\TabbedPanel\\TabbedPanelServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "TabbedPanel": "Aldesrahim\\TabbedPanel\\Facades\\TabbedPanel"
             }
         }
     },

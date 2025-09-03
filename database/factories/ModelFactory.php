@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Database\Factories;
+namespace Aldesrahim\TabbedPanel\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Aldesrahim\TabbedPanel;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class TabbedPanelPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'tabbed-panel';
     }
 
     public function register(Panel $panel): void
