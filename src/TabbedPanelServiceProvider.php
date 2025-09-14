@@ -2,15 +2,13 @@
 
 namespace Aldesrahim\TabbedPanel;
 
-use Aldesrahim\TabbedPanel\Commands\TabbedPanelCommand;
 use Aldesrahim\TabbedPanel\Testing\TestsTabbedPanel;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
-use Filament\Support\Facades\FilamentIcon;
-use Illuminate\Filesystem\Filesystem;
+use Illuminate\Contracts\Foundation\Application;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -30,7 +28,6 @@ class TabbedPanelServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package->name(static::$name)
-            ->hasCommands($this->getCommands())
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
@@ -68,25 +65,17 @@ class TabbedPanelServiceProvider extends PackageServiceProvider
             $this->getAssetPackageName()
         );
 
-        FilamentAsset::registerScriptData(
-            $this->getScriptData(),
-            $this->getAssetPackageName()
-        );
-
-        // Icon Registration
-        FilamentIcon::register($this->getIcons());
-
-        // Handle Stubs
-        if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
-                $this->publishes([
-                    $file->getRealPath() => base_path("stubs/tabbed-panel/{$file->getFilename()}"),
-                ], 'tabbed-panel-stubs');
-            }
-        }
-
         // Testing
         Testable::mixin(new TestsTabbedPanel);
+
+        $this->app->singleton(TabbedPanelManager::class, fn () => new TabbedPanelManager);
+
+        $this->app->scoped(TabbedPanel::class, function (Application $app) {
+            $manager = $app->make(TabbedPanelManager::class);
+            $store = $manager->store();
+
+            return new TabbedPanel($store);
+        });
     }
 
     protected function getAssetPackageName(): ?string
@@ -107,46 +96,12 @@ class TabbedPanelServiceProvider extends PackageServiceProvider
     }
 
     /**
-     * @return array<class-string>
-     */
-    protected function getCommands(): array
-    {
-        return [
-            TabbedPanelCommand::class,
-        ];
-    }
-
-    /**
-     * @return array<string>
-     */
-    protected function getIcons(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string>
-     */
-    protected function getRoutes(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    protected function getScriptData(): array
-    {
-        return [];
-    }
-
-    /**
      * @return array<string>
      */
     protected function getMigrations(): array
     {
         return [
-            'create_tabbed-panel_table',
+            'create_tabbed_panel_tabs_table',
         ];
     }
 }
