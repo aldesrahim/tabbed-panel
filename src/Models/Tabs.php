@@ -6,6 +6,16 @@ use Aldesrahim\TabbedPanel\Context;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property int $tenant_id
+ * @property string $tab_key
+ * @property array $tab_data
+ * @property int $tab_order
+ * @property bool $is_active
+ * @mixin \Eloquent
+ */
 class Tabs extends Model
 {
     protected $table = 'tabbed_panel_tabs';

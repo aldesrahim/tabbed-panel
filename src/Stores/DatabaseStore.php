@@ -35,10 +35,11 @@ class DatabaseStore implements StoreContract
     {
         $tabKey = $tab['key'];
 
+        /** @var ?Tabs $existing */
         $existing = $this->baseQuery()->where('tab_key', $tabKey)->first();
 
         if (null === $order = $existing?->tab_order) {
-            $order = 1 + $this->baseQuery()->max('tab_order') ?? 0;
+            $order = 1 + $this->baseQuery()->max('tab_order') ?: 0;
         }
 
         $newTab = Tabs::query()->updateOrCreate(
@@ -70,6 +71,7 @@ class DatabaseStore implements StoreContract
 
     public function removeTab(string $tabKey): void
     {
+        /** @var ?Tabs $tabToRemove */
         $tabToRemove = $this->baseQuery()->where('tab_key', $tabKey)->first();
 
         if (! $tabToRemove) {

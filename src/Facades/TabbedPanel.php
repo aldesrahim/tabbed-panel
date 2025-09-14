@@ -2,6 +2,7 @@
 
 namespace Aldesrahim\TabbedPanel\Facades;
 
+use Aldesrahim\TabbedPanel\Stores\Contracts\StoreContract;
 use Illuminate\Support\Facades\Facade;
 
 /**
