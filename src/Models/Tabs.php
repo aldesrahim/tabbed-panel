@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property array $tab_data
  * @property int $tab_order
  * @property bool $is_active
+ *
  * @mixin \Eloquent
  */
 class Tabs extends Model
